@@ -16,5 +16,6 @@ defmodule ArticlesApi.Articles.Article do
     article
     |> cast(attrs, [:title, :description, :body, :published_date])
     |> validate_required([:title, :body, :published_date])
+    |> validate_length(:title, max: 150)
   end
 end
