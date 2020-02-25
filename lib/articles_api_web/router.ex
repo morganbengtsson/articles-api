@@ -7,5 +7,6 @@ defmodule ArticlesApiWeb.Router do
 
   scope "/api", ArticlesApiWeb do
     pipe_through :api
+    resources "/articles", ArticleController, except: [:new, :edit]
   end
 end
