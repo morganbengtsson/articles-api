@@ -2,13 +2,18 @@ defmodule ArticlesApi.ArticlesTest do
   use ArticlesApi.DataCase
 
   alias ArticlesApi.Articles
+  alias ArticlesApi.Authors.Author
 
   describe "articles" do
     alias ArticlesApi.Articles.Article
 
-    @valid_attrs %{body: "some body", description: "some description", published_date: ~D[2010-04-17], title: "some title"}
+    @valid_attrs %{author_id: 1, body: "some body", description: "some description", published_date: ~D[2010-04-17], title: "some title"}
     @update_attrs %{body: "some updated body", description: "some updated description", published_date: ~D[2011-05-18], title: "some updated title"}
     @invalid_attrs %{body: nil, description: nil, published_date: nil, title: nil}
+
+    setup do
+      Repo.insert! %Author{id: 1, first_name: "John", last_name: "Doe", age: 25}      
+    end
 
     def article_fixture(attrs \\ %{}) do
       {:ok, article} =
