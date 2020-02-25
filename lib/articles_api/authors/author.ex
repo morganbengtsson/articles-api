@@ -6,6 +6,7 @@ defmodule ArticlesApi.Authors.Author do
     field :age, :integer
     field :first_name, :string
     field :last_name, :string
+    has_many :articles, ArticlesApi.Articles.Article
 
     timestamps()
   end

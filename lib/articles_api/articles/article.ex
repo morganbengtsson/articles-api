@@ -7,6 +7,7 @@ defmodule ArticlesApi.Articles.Article do
     field :description, :string
     field :published_date, :date
     field :title, :string
+    belongs_to :author, ArticlesApi.Authors.Author
 
     timestamps()
   end
