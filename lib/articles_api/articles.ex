@@ -18,8 +18,7 @@ defmodule ArticlesApi.Articles do
 
   """
   def list_articles do
-    posts = Repo.all(Article)
-    posts = Repo.preload(posts, :author)
+    Repo.all(Article) |> Repo.preload(:author)
   end
 
   @doc """

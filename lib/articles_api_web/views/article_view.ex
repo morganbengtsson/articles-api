@@ -16,6 +16,7 @@ defmodule ArticlesApiWeb.ArticleView do
       description: article.description,
       body: article.body,
       published_date: article.published_date,
-      author: article.author}
+      author: render_one(article.author, ArticlesApiWeb.AuthorView, "author.json")
+     }
   end
 end
