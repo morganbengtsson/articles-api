@@ -15,6 +15,7 @@ defmodule ArticlesApiWeb.ArticleView do
       title: article.title,
       description: article.description,
       body: article.body,
-      published_date: article.published_date}
+      published_date: article.published_date,
+      author: article.author}
   end
 end

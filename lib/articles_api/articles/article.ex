@@ -16,7 +16,7 @@ defmodule ArticlesApi.Articles.Article do
   def changeset(article, attrs) do
     article
     |> cast(attrs, [:title, :description, :body, :published_date])
-    |> validate_required([:title, :body, :published_date])
+    |> validate_required([:title, :body, :published_date, :author_id])
     |> validate_length(:title, max: 150)
   end
 end
