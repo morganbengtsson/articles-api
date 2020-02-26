@@ -5,7 +5,7 @@ defmodule ArticlesApi.Articles.Article do
   schema "articles" do
     field :body, :string
     field :description, :string
-    field :published_date, :date
+    field :published_date, :utc_datetime
     field :title, :string
     belongs_to :author, ArticlesApi.Authors.Author
 

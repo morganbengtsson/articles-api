@@ -13,7 +13,7 @@ defmodule ArticlesApi.Repo.Migrations.CreateArticles do
       add :title, :string
       add :description, :string
       add :body, :string
-      add :published_date, :date
+      add :published_date, :utc_datetime
       add :author_id, references(:authors), null: false
 
       timestamps()
