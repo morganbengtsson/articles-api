@@ -14,7 +14,8 @@ defmodule ArticlesApi.ArticlesTest do
     @invalid_attrs %{body: nil, description: nil, published_date: nil, title: nil}
 
     setup do
-      Repo.insert! %Author{id: 1, first_name: "John", last_name: "Doe", age: 25}      
+      Repo.insert!(%Author{id: 1, first_name: "John", last_name: "Doe", age: 25})
+      :ok
     end
 
     def article_fixture(attrs \\ %{}) do
