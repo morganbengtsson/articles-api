@@ -51,6 +51,7 @@ defmodule ArticlesApi.Articles do
   """
   def create_article(attrs \\ %{}) do
     %Article{}
+    |> Repo.preload(:author)
     |> Article.changeset(attrs)
     |> Repo.insert()
   end
