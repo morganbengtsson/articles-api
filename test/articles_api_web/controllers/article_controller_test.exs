@@ -55,7 +55,7 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
                "description" => "some description",
                "published_date" => "2010-04-17",
                "title" => "some title",
-               "author_id" => 1
+               "author_id" => author_id
              } = json_response(conn, 200)["data"]
     end
 
