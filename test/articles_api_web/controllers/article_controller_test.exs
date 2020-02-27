@@ -18,6 +18,11 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
   }
   @invalid_attrs %{body: nil, description: nil, published_date: nil, title: nil}
 
+  setup do
+    Repo.insert!(%Author{id: 1, first_name: "John", last_name: "Doe", age: 25})
+    :ok
+  end
+
   def fixture(:article) do
     {:ok, article} = Articles.create_article(@create_attrs)
     article
