@@ -1,10 +1,10 @@
 defmodule ArticlesApiWeb.ArticleControllerTest do
   use ArticlesApiWeb.ConnCase
-  use ArticlesApi.DataCase
 
   alias ArticlesApi.Articles
   alias ArticlesApi.Articles.Article
   alias ArticlesApi.Authors.Author
+  alias ArticlesApi.Authors
 
   @create_attrs %{
     body: "some body",
@@ -22,9 +22,9 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
   }
   @invalid_attrs %{body: nil, description: nil, published_date: nil, title: nil}
 
-  setup do
-    Repo.insert!(%Author{id: 1, first_name: "John", last_name: "Doe", age: 25})
-    :ok
+  setup_all do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ArticlesApi.Repo)
+    {:ok, author: Authors.create_author(%{first_name: "John", last_name: "Doe", age: 25})} 
   end
 
   def fixture(:article) do
