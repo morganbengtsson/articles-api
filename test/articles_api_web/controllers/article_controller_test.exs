@@ -1,20 +1,24 @@
 defmodule ArticlesApiWeb.ArticleControllerTest do
   use ArticlesApiWeb.ConnCase
+  use ArticlesApi.DataCase
 
   alias ArticlesApi.Articles
   alias ArticlesApi.Articles.Article
+  alias ArticlesApi.Authors.Author
 
   @create_attrs %{
     body: "some body",
     description: "some description",
     published_date: ~D[2010-04-17],
-    title: "some title"
+    title: "some title",
+    author_id: 1
   }
   @update_attrs %{
     body: "some updated body",
     description: "some updated description",
     published_date: ~D[2011-05-18],
-    title: "some updated title"
+    title: "some updated title",
+    author_id: 1
   }
   @invalid_attrs %{body: nil, description: nil, published_date: nil, title: nil}
 
@@ -51,7 +55,8 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
                "body" => "some body",
                "description" => "some description",
                "published_date" => "2010-04-17",
-               "title" => "some title"
+               "title" => "some title",
+               "author_id" => 1
              } = json_response(conn, 200)["data"]
     end
 
