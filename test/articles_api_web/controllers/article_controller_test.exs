@@ -64,6 +64,7 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
     end
   end
 
+  """
   describe "update article" do
     setup [:create_article]
 
@@ -87,6 +88,7 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
+  """
 
   describe "delete article" do
     setup [:create_article]
