@@ -6,6 +6,7 @@ defmodule ArticlesApi.Repo.Migrations.CreateArticles do
       add :first_name, :string
       add :last_name, :string
       add :age, :integer
+      add :token, :string
 
       timestamps()
     end
