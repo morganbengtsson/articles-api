@@ -25,7 +25,8 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
   end
 
   def fixture(:article) do
-    {:ok, article} = Articles.create_article(@create_attrs)
+    author = ArticlesApi.Repo.insert! %Author{first_name: "John", last_name: "Doe", age: 25}
+    {:ok, article} = Articles.create_article(Map.put(@create_attrs, :author_id, author.id))
     article
   end
 
