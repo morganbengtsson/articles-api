@@ -22,8 +22,6 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
 
   setup_all do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(ArticlesApi.Repo)
-    author = ArticlesApi.Repo.insert! %Author{first_name: "John", last_name: "Doe", age: 25}
-    [author_id: author.id]
   end
 
   def fixture(:article) do
@@ -32,7 +30,8 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
   end
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    author = ArticlesApi.Repo.insert! %Author{first_name: "John", last_name: "Doe", age: 25}
+    {:ok, conn: put_req_header(conn, "accept", "application/json"), author: author}
   end
 
   describe "index" do
@@ -43,8 +42,8 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
   end
 
   describe "create article" do
-    test "renders article when data is valid", %{conn: conn, author_id: author_id} do
-      conn = post(conn, Routes.article_path(conn, :create), article: Map.put(@create_attrs, :author_id, author_id))
+    test "renders article when data is valid", %{conn: conn, author: author} do
+      conn = post(conn, Routes.article_path(conn, :create), article: Map.put(@create_attrs, :author_id, author.id))
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.article_path(conn, :show, id))
@@ -55,7 +54,7 @@ defmodule ArticlesApiWeb.ArticleControllerTest do
                "description" => "some description",
                "published_date" => "2010-04-17",
                "title" => "some title",
-               "author_id" => author_id
+               "author" => author
              } = json_response(conn, 200)["data"]
     end
 
