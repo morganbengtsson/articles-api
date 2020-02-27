@@ -19,4 +19,11 @@ defmodule ArticlesApi.Authors.Author do
     |> validate_required([:first_name, :last_name, :age])
     |> validate_number(:age, greater_than: 13)
   end
+
+  @doc false
+  def changeset_token(author, attrs) do
+    author
+    |> cast(attrs, [:token])
+    |> validate_required([:token])
+  end
 end

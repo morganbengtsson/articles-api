@@ -50,9 +50,12 @@ defmodule ArticlesApi.Authors do
 
   """
   def create_author(attrs \\ %{}) do
-    %Author{}
+    case %Author{}
     |> Author.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert() do
+      {:ok, struct} -> Author.changeset_token(struct, %{token: "hejsan"}) |> Repo.update()
+      {:error, changeset} -> {:error, changeset}
+    end
   end
 
   @doc """
