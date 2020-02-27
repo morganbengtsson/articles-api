@@ -7,6 +7,7 @@ defmodule ArticlesApiWeb.AuthorController do
   action_fallback ArticlesApiWeb.FallbackController
 
   def index(conn, _params) do
+    IO.puts(get_req_header(conn, "authorization") |> List.first |> String.split(" ") |> List.last)
     authors = Authors.list_authors()
     render(conn, "index.json", authors: authors)
   end

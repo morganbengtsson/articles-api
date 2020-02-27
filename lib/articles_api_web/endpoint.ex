@@ -29,7 +29,7 @@ defmodule ArticlesApiWeb.Endpoint do
   if code_reloading? do
     plug Phoenix.CodeReloader
   end
-
+  
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
