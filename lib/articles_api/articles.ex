@@ -35,7 +35,7 @@ defmodule ArticlesApi.Articles do
       ** (Ecto.NoResultsError)
 
   """
-  def get_article!(id), do: Repo.get!(Article, id)
+  def get_article!(id), do: Repo.get!(Article, id) |> Repo.preload(:author)
 
   @doc """
   Creates a article.
@@ -50,9 +50,12 @@ defmodule ArticlesApi.Articles do
 
   """
   def create_article(attrs \\ %{}) do
-    %Article{}
+    case %Article{}
     |> Article.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert() do
+      {:ok, article} -> {:ok, Repo.preload(article, :author)}
+      {:error, err} -> {:error, err}
+    end
   end
 
   @doc """

@@ -10,7 +10,7 @@ defmodule ArticlesApi.ArticlesTest do
     @utc DateTime.now("Etc/UTC")|> elem(1) |> DateTime.truncate(:second)
 
     @valid_attrs %{author_id: 1, body: "some body", description: "some description", published_date: @utc, title: "some title"}
-    @update_attrs %{body: "some updated body", description: "some updated description", published_date: @utc, title: "some updated title"}
+    @update_attrs %{author_id: 1, body: "some updated body", description: "some updated description", published_date: @utc, title: "some updated title"}
     @invalid_attrs %{body: nil, description: nil, published_date: nil, title: nil}
 
     setup do
