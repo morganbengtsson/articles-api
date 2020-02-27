@@ -53,7 +53,7 @@ defmodule ArticlesApi.Authors do
     case %Author{}
     |> Author.changeset(attrs)
     |> Repo.insert() do
-      {:ok, struct} -> Author.changeset_token(struct, %{token: "hejsan"}) |> Repo.update()
+      {:ok, struct} -> Author.changeset_token(struct, %{token: Phoenix.Token.sign(ArticlesApiWeb.Endpoint, "saltsalt123", struct.id)}) |> Repo.update()
       {:error, changeset} -> {:error, changeset}
     end
   end
