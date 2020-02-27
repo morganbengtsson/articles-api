@@ -16,7 +16,7 @@ defmodule ArticlesApiWeb.AuthorController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.author_path(conn, :show, author))
-      |> render("show.json", author: author)
+      |> render("created.json", author: author)
     end
   end
 
