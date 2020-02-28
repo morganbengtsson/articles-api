@@ -25,14 +25,6 @@ defmodule ArticlesApiWeb.ArticleController do
     render(conn, "show.json", article: article)
   end
 
-  def update(conn, %{"id" => id, "article" => article_params}) do
-    article = Articles.get_article!(id)
-
-    with {:ok, %Article{} = article} <- Articles.update_article(article, article_params) do
-      render(conn, "show.json", article: article)
-    end
-  end
-
   def delete(conn, %{"id" => id}) do
     article = Articles.get_article!(id)
     auth = get_req_header(conn, "authorization") 

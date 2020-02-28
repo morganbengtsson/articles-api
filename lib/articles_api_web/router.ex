@@ -8,6 +8,6 @@ defmodule ArticlesApiWeb.Router do
   scope "/api", ArticlesApiWeb do
     pipe_through :api
     resources "/articles", ArticleController, only: [:index, :create, :delete, :show]    
-    resources "/authors", AuthorController, only: [:index, :show, :create, :update]
+    resources "/authors", AuthorController, only: [:create, :show, :update]
   end
 end
