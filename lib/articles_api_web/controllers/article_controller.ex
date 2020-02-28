@@ -35,7 +35,8 @@ defmodule ArticlesApiWeb.ArticleController do
 
   def delete(conn, %{"id" => id}) do
     article = Articles.get_article!(id)
-    if get_req_header(conn, "authorization") |> List.first |> String.split(" ") |> List.last != article.author.token do
+    auth = get_req_header(conn, "authorization") 
+    if auth == [] || auth |> List.first |> String.split(" ") |> List.last != article.author.token do
       put_status(conn, 403) |> render(ArticlesApiWeb.ErrorView, "403.json", %{message: "You need to be a team admin"})
     else
       with {:ok, %Article{}} <- Articles.delete_article(article) do
