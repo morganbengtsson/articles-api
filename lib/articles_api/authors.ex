@@ -44,8 +44,9 @@ defmodule ArticlesApi.Authors do
   Raises `Ecto.NoResultsError` if the Author does not exist.
 
   """
-  def get_author_by_token!(token), do: Repo.get_by!(Author, "token", token)
-
+  def get_author_by_token(token) do     
+     Repo.one(from a in Author, where: a.token == ^token)
+  end
   @doc """
   Creates a author.
 
