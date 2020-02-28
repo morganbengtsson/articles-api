@@ -20,11 +20,16 @@ defmodule ArticlesApiWeb.AuthorController do
     render(conn, "show.json", author: author)
   end
 
-  def delete(conn, %{"id" => id}) do
-    author = Authors.get_author!(id)
-
-    with {:ok, %Author{}} <- Authors.delete_author(author) do
-      send_resp(conn, :no_content, "")
+  def update(conn, %{"id" => id, "author" => author_params}) do
+        author = Authors.get_author!(id)
+        
+        auth = get_req_header(conn, "authorization") 
+        if auth == [] || auth |> List.first |> String.split(" ") |> List.last != author.token do
+          put_status(conn, 403) |> render(ArticlesApiWeb.ErrorView, "403.json", %{message: "You need to be a team admin"})
+        else
+          with {:ok, %Author{} = author} <- Authors.update_author(author, author_params) do
+            render(conn, "show.json", author: author)
+          end
+        end
     end
-  end
 end
