@@ -25,7 +25,7 @@ defmodule ArticlesApiWeb.AuthorController do
         
         auth = get_req_header(conn, "authorization") 
         if auth == [] || auth |> List.first |> String.split(" ") |> List.last != author.token do
-          put_status(conn, 403) |> render(ArticlesApiWeb.ErrorView, "403.json", %{message: "You need to be a team admin"})
+          put_status(conn, 403) |> render(ArticlesApiWeb.ErrorView, "403.json", %{message: "Forbidden to do that"})
         else
           with {:ok, %Author{} = author} <- Authors.update_author(author, author_params) do
             render(conn, "show.json", author: author)
