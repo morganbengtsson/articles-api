@@ -17,7 +17,7 @@ defmodule ArticlesApi.Authors.Author do
     author
     |> cast(attrs, [:first_name, :last_name, :age])
     |> validate_required([:first_name, :last_name, :age])
-    |> validate_number(:age, greater_than: 13)
+    |> validate_number(:age, greater_than: 13)    
   end
 
   @doc false
@@ -25,5 +25,6 @@ defmodule ArticlesApi.Authors.Author do
     author
     |> cast(attrs, [:token])
     |> validate_required([:token])
+    |> unique_constraint(:token)
   end
 end

@@ -7,12 +7,8 @@ defmodule ArticlesApiWeb.AuthorController do
   action_fallback ArticlesApiWeb.FallbackController
 
   def index(conn, _params) do    
-    if get_req_header(conn, "authorization") |> List.first |> String.split(" ") |> List.last == "123" do
-      send_resp(conn, 403, "Nope")
-    else
     authors = Authors.list_authors()
     render(conn, "index.json", authors: authors)
-    end
   end
 
   def create(conn, %{"author" => author_params}) do

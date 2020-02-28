@@ -35,9 +35,13 @@ defmodule ArticlesApiWeb.ArticleController do
 
   def delete(conn, %{"id" => id}) do
     article = Articles.get_article!(id)
-
-    with {:ok, %Article{}} <- Articles.delete_article(article) do
-      send_resp(conn, :no_content, "")
+    if get_req_header(conn, "authorization") |> List.first |> String.split(" ") |> List.last != article.author.token do
+      send_resp(conn, 403, "You are not authorized to do that")
+      #render(conn, "403.json")
+    else
+      with {:ok, %Article{}} <- Articles.delete_article(article) do
+        send_resp(conn, :no_content, "")
+      end
     end
   end
 end

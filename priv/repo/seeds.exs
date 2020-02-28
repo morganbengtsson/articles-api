@@ -14,8 +14,8 @@ alias ArticlesApi.Repo
 alias ArticlesApi.Articles.Article
 alias ArticlesApi.Authors.Author
 
-author0 = Repo.insert! %Author{first_name: "John", last_name: "Doe", age: 25, token: "Temp"}
-author1 = Repo.insert! %Author{first_name: "Jane", last_name: "Doe", age: 49, token: "Temp"}
+author0 = Repo.insert! %Author{first_name: "John", last_name: "Doe", age: 25, token: "token0"}
+author1 = Repo.insert! %Author{first_name: "Jane", last_name: "Doe", age: 49, token: "token1"}
 
 date = ~D[2000-01-01]
 
